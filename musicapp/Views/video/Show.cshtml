@@ -1,0 +1,166 @@
+﻿@using ClientDependency.Core.Mvc
+@model IEnumerable<musicapp.Models.VideoTable>
+
+@{
+    ViewBag.Title = "Bootstrap version demo";
+
+    Html.RequiresCss("Bootstrap/bootstrap.min.css", "Content", 2);
+    Html.RequiresCss("Bootstrap/bootstrap-responsive.min.css", "Content", 3);
+    Html.RequiresCss("Bootstrap/bootstrap-image-gallery.min.css", "Content", 4);
+
+    Html.RequiresCss("FileUpload/jquery.fileupload-ui.css", "Content", 5);
+    
+    
+    Html.RequiresJs("jquery/1.7.1/jquery.min.js", "googleCDN", 1);
+    Html.RequiresJs("jqueryui/1.8.18/jquery-ui.min.js", "googleCDN", 2);
+
+    Html.RequiresJs("FileUpload/tmpl.min.js", "Content", 5);
+    Html.RequiresJs("FileUpload/canvas-to-blob.min.js", "Content", 5);
+    Html.RequiresJs("FileUpload/load-image.min.js", "Content", 5);
+
+    Html.RequiresJs("Bootstrap/bootstrap-image-gallery.min.js", "Content", 6);
+    Html.RequiresJs("Bootstrap/bootstrap.min.js", "Content", 6);
+
+    Html.RequiresJs("FileUpload/jquery.iframe-transport.js", "Content", 10);
+    Html.RequiresJs("FileUpload/jquery.fileupload.js", "Content", 10);
+    Html.RequiresJs("FileUpload/jquery.fileupload-ip.js", "Content", 20);
+    Html.RequiresJs("FileUpload/jquery.fileupload-ui.js", "Content", 30);
+
+    Html.RequiresJs("FileUpload/locale.js", "Content", 90);
+    Html.RequiresJs("FileUpload/main.js", "Content", 99);
+}
+
+
+<!-- Shim to make HTML5 elements usable in older Internet Explorer versions -->
+<!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+        <link href="http://vjs.zencdn.net/4.1/video-js.css" rel="stylesheet">
+        <script src="http://vjs.zencdn.net/4.1/video.js"></script>
+        <style type="text/css">
+          .vjs-play-progress, .vjs-volume-level { background-color: #ee4545 }
+          .vjs-control-bar, .vjs-big-play-button { background: rgba(26,113,164,0.7) }
+          .vjs-slider { background: rgba(26,113,164,0.2333333333333333) }
+          .vjs-control-bar { font-size: 90% }
+          
+         .gridTitle
+          {
+              background: rgba(230, 232, 233, 0.7);
+              -webkit-border-radius: 1px;
+                -moz-border-radius: 1px;
+                border-radius: 1px;
+                border-style:solid;
+                border-width: 1px;
+                padding-left: 10px;
+                padding-bottom: 15px;
+                border-color: #DCDFD9;
+          }
+          
+          .demo2
+          {
+              position:static;
+              border: 1px solid #2b2b2b
+          }
+          .cover_holder 
+          {
+                background: #29292B;
+                padding: 6px;
+                float: left;
+                border: 1px solid #e3e3e3;
+	            margin-bottom:15px;
+	            width:938px;
+           }
+           
+            #ytvideo,
+            #ytvideo2 {
+                float: left;
+	            margin-right:0px;
+            }
+            
+            ul {
+                float: left;
+                margin: 0;
+                padding: 0;
+                width: 320px;
+            }
+
+              ul li {
+                list-style-type: none;
+                display:block;
+                background: #2b2b2b;
+                float: left;
+                width: 316px;
+                margin: 0px;
+	            padding:2px;
+                border-top: 1px solid #393939;
+                border-bottom: 1px solid #1d1d1d;
+                font-size:13px;
+                color: #ECECEC;
+                text-shadow: 0 1px 0 #000; 
+            }
+
+            ul li img {
+                width: 66px;
+                float: left;
+                margin-right: 5px;
+                border: 1px solid #999;
+            }
+
+            ul li a {
+                text-decoration: none;
+                display: block;
+                color: #ECECEC;
+                position:relative;
+                overflow:hidden;
+                color: #FFF;
+                zoom: 1;
+            }
+
+            .currentvideo {
+	            background: #4f4f4f;
+            }
+            #playlist-tray
+            {
+                position:absolute;
+                top:0;
+                left: 0;
+                z-index: 3;
+                overflow: hidden;
+                background: #2b2b2b;
+                width: 100%;
+                height: 100%;
+            }
+        </style>
+
+<div class="cover_holder">
+        <div id="ytvideo">
+            <video id="my_video_1" class="video-js vjs-default-skin" controls
+             preload="auto" width="616" height="350" poster="my_video_poster.png"
+             data-setup="{}">
+             <source src="~/Files/Justin_Timberlake_Mirrors.mp4" type='video/mp4'>
+            </video>
+        </div>
+        <ul class="demo2">
+            <li class=""><a href="http://www.youtube.com/watch?v=QBBWKvY-VDc" title="Video 1"><img src="http://img.youtube.com/vi/QBBWKvY-VDc/2.jpg" alt="Video 1">Justin Timberlake - Drum Cover</a></li>
+            <li class="currentvideo"><a href="http://www.youtube.com/watch?v=ZXMQqLnRhRI" title="Video 2"><img src="http://img.youtube.com/vi/ZXMQqLnRhRI/2.jpg" alt="Video 2">JT - Mirrors - Guitar cover</a></li>
+            <li class=""><a href="http://www.youtube.com/watch?v=Wvo-g_JvURI" title="Video 3"><img src="http://img.youtube.com/vi/Wvo-g_JvURI/2.jpg" alt="Video 3">Justin Timberlake - Guitar/Drum cover</a></li>
+            <li class=""><a href="http://www.youtube.com/watch?v=QBBWKvY-VDc" title="Video 1"><img src="http://img.youtube.com/vi/QBBWKvY-VDc/2.jpg" alt="Video 1">Justin Timberlake - Drum Cover</a></li>
+            <li class=""><a href="http://www.youtube.com/watch?v=ZXMQqLnRhRI" title="Video 2"><img src="http://img.youtube.com/vi/ZXMQqLnRhRI/2.jpg" alt="Video 2">JT - Mirrors - Guitar cover</a></li>
+            <li class=""><a href="http://www.youtube.com/watch?v=Wvo-g_JvURI" title="Video 3"><img src="http://img.youtube.com/vi/Wvo-g_JvURI/2.jpg" alt="Video 3">Justin Timberlake - Guitar/Drum cover</a></li>
+        </ul>
+</div>
+
+ <br />
+   <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'coverio'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function () {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>

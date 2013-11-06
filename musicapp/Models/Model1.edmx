@@ -1,0 +1,387 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="muzykaDatabaseModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="muzykaDatabaseModelStoreContainer">
+          <EntitySet Name="Users" EntityType="muzykaDatabaseModel.Store.Users" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UsersRoles" EntityType="muzykaDatabaseModel.Store.UsersRoles" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="VideoCorrelations" EntityType="muzykaDatabaseModel.Store.VideoCorrelations" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="VideoTables" EntityType="muzykaDatabaseModel.Store.VideoTables" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_dbo_Users_dbo_UsersRoles_RoleId" Association="muzykaDatabaseModel.Store.FK_dbo_Users_dbo_UsersRoles_RoleId">
+            <End Role="UsersRoles" EntitySet="UsersRoles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="250" />
+          <Property Name="PasswordSalt" Type="nvarchar" Nullable="false" MaxLength="250" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="LastModifiedDate" Type="datetime" />
+          <Property Name="LastLoginDate" Type="datetime" />
+          <Property Name="IsActivated" Type="bit" Nullable="false" />
+          <Property Name="AccountActivationCode" Type="nvarchar" MaxLength="250" />
+          <Property Name="PasswordResetCode" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="UsersRoles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="VideoCorrelations">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="OriginalVideoID" Type="int" Nullable="false" />
+          <Property Name="CoverVideoID" Type="int" Nullable="false" />
+          <Property Name="DateAssociation" Type="datetime" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VideoTables">
+          <Key>
+            <PropertyRef Name="musicID" />
+          </Key>
+          <Property Name="musicID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="musicName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="musicArtist" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="musicTypeExtension" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="musicDateUpload" Type="datetime" Nullable="false" />
+          <Property Name="musicGuid" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="musicType" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="musicDescription" Type="nvarchar(max)" />
+          <Property Name="musicPath" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="musicFileName" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_dbo_Users_dbo_UsersRoles_RoleId">
+          <End Role="UsersRoles" Type="muzykaDatabaseModel.Store.UsersRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Users" Type="muzykaDatabaseModel.Store.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UsersRoles">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="muzykaDatabaseModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="muzykaDatabaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="friendsConnectedTable" EntityType="muzykaDatabaseModel.friendsConnectedTable" />
+          <EntitySet Name="instrumentTable" EntityType="muzykaDatabaseModel.instrumentTable" />
+          <EntitySet Name="musicMusicTable" EntityType="muzykaDatabaseModel.musicMusicTable" />
+          <EntitySet Name="tabulatureTable" EntityType="muzykaDatabaseModel.tabulatureTable" />
+          <EntitySet Name="Users" EntityType="muzykaDatabaseModel.Users" />
+          <EntitySet Name="UsersRoles" EntityType="muzykaDatabaseModel.UsersRoles" />
+          <EntitySet Name="VideoCorrelations" EntityType="muzykaDatabaseModel.VideoCorrelations" />
+          <EntitySet Name="VideoTables" EntityType="muzykaDatabaseModel.VideoTables" />
+          <AssociationSet Name="FK_dbo_Users_dbo_UsersRoles_RoleId" Association="muzykaDatabaseModel.FK_dbo_Users_dbo_UsersRoles_RoleId">
+            <End Role="UsersRoles" EntitySet="UsersRoles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="musicMusicTableUsers" Association="muzykaDatabaseModel.musicMusicTableUsers">
+            <End Role="musicMusicTable" EntitySet="musicMusicTable" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="VideoTablesUsers" Association="muzykaDatabaseModel.VideoTablesUsers">
+            <End Role="VideoTables" EntitySet="VideoTables" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="UserstabulatureTable" Association="muzykaDatabaseModel.UserstabulatureTable">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="tabulatureTable" EntitySet="tabulatureTable" />
+          </AssociationSet>
+          <AssociationSet Name="UsersVideoCorrelations" Association="muzykaDatabaseModel.UsersVideoCorrelations">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="VideoCorrelations" EntitySet="VideoCorrelations" />
+          </AssociationSet>
+          <AssociationSet Name="UsersinstrumentTable" Association="muzykaDatabaseModel.UsersinstrumentTable">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="instrumentTable" EntitySet="instrumentTable" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="friendsConnectedTable">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MainUserID" Type="Int32" />
+          <Property Name="FriendID" Type="Int32" />
+          <Property Name="CreateDate" Type="DateTime" />
+          <Property Name="RealFriend" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="instrumentTable">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userID" Type="Int32" />
+          <Property Name="instrumentName" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
+          <Property Name="instrumentDescription" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
+          <Property Name="instrumentPlayingTimeExperience" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Users" Relationship="muzykaDatabaseModel.UsersinstrumentTable" FromRole="instrumentTable" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="musicMusicTable">
+          <Key>
+            <PropertyRef Name="musicMusicID" />
+          </Key>
+          <Property Name="musicMusicID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="musicMusicName" Type="String" Nullable="false" MaxLength="150" Unicode="true" FixedLength="false" />
+          <Property Name="musicMusicArtist" Type="String" Nullable="false" MaxLength="150" Unicode="true" FixedLength="false" />
+          <Property Name="musicMusicTypeExt" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="musicMusicDateUpload" Type="DateTime" Nullable="false" />
+          <Property Name="musicMusicGuid" Type="String" Nullable="false" MaxLength="150" Unicode="true" FixedLength="false" />
+          <Property Name="musicMusicType" Type="String" Nullable="false" MaxLength="150" Unicode="true" FixedLength="false" />
+          <Property Name="musicMusicDescription" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="musicMusicPath" Type="String" Nullable="false" MaxLength="150" Unicode="true" FixedLength="false" />
+          <Property Name="musicMusicFileName" Type="String" Nullable="false" MaxLength="150" Unicode="true" FixedLength="false" />
+          <Property Name="musicMusicFlex" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Users" Relationship="muzykaDatabaseModel.musicMusicTableUsers" FromRole="musicMusicTable" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="tabulatureTable">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userID" Type="Int32" />
+          <Property Name="coverID" Type="Int32" />
+          <Property Name="intrumentID" Type="Int32" />
+          <Property Name="tabSitePath" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
+          <Property Name="tabFolderPath" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
+          <Property Name="tabName" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
+          <Property Name="tabExtension" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="tabDescription" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
+          <Property Name="tabContent" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="tabUploadTime" Type="DateTime" />
+          <Property Name="tabGuid" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Users" Relationship="muzykaDatabaseModel.UserstabulatureTable" FromRole="tabulatureTable" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Type="Int32" Name="UserId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="RoleId" Nullable="false" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="PasswordSalt" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
+          <Property Type="DateTime" Name="LastModifiedDate" />
+          <Property Type="DateTime" Name="LastLoginDate" />
+          <Property Type="Boolean" Name="IsActivated" Nullable="false" />
+          <Property Type="String" Name="AccountActivationCode" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="PasswordResetCode" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="UsersRoles" Relationship="muzykaDatabaseModel.FK_dbo_Users_dbo_UsersRoles_RoleId" FromRole="Users" ToRole="UsersRoles" />
+          <NavigationProperty Name="musicMusicTable" Relationship="muzykaDatabaseModel.musicMusicTableUsers" FromRole="Users" ToRole="musicMusicTable" />
+          <NavigationProperty Name="VideoTables" Relationship="muzykaDatabaseModel.VideoTablesUsers" FromRole="Users" ToRole="VideoTables" />
+          <NavigationProperty Name="tabulatureTable" Relationship="muzykaDatabaseModel.UserstabulatureTable" FromRole="Users" ToRole="tabulatureTable" />
+          <NavigationProperty Name="VideoCorrelations" Relationship="muzykaDatabaseModel.UsersVideoCorrelations" FromRole="Users" ToRole="VideoCorrelations" />
+          <NavigationProperty Name="instrumentTable" Relationship="muzykaDatabaseModel.UsersinstrumentTable" FromRole="Users" ToRole="instrumentTable" />
+        </EntityType>
+        <EntityType Name="UsersRoles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Type="Int32" Name="RoleId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="RoleName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Users" Relationship="muzykaDatabaseModel.FK_dbo_Users_dbo_UsersRoles_RoleId" FromRole="UsersRoles" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="VideoCorrelations">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="OriginalVideoID" Nullable="false" />
+          <Property Type="Int32" Name="CoverVideoID" Nullable="false" />
+          <Property Type="DateTime" Name="DateAssociation" Nullable="false" />
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="muzykaDatabaseModel.UsersVideoCorrelations" FromRole="VideoCorrelations" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="VideoTables">
+          <Key>
+            <PropertyRef Name="musicID" />
+          </Key>
+          <Property Type="Int32" Name="musicID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="musicName" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="musicArtist" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="musicTypeExtension" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="musicDateUpload" Nullable="false" />
+          <Property Type="String" Name="musicGuid" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="musicType" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="musicDescription" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="musicPath" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="musicFileName" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Users" Relationship="muzykaDatabaseModel.VideoTablesUsers" FromRole="VideoTables" ToRole="Users" />
+        </EntityType>
+        <Association Name="FK_dbo_Users_dbo_UsersRoles_RoleId">
+          <End Type="muzykaDatabaseModel.UsersRoles" Role="UsersRoles" Multiplicity="1" />
+          <End Type="muzykaDatabaseModel.Users" Role="Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UsersRoles">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="musicMusicTableUsers">
+          <End Type="muzykaDatabaseModel.musicMusicTable" Role="musicMusicTable" Multiplicity="*" />
+          <End Type="muzykaDatabaseModel.Users" Role="Users" Multiplicity="*" />
+        </Association>
+        <Association Name="VideoTablesUsers">
+          <End Type="muzykaDatabaseModel.VideoTables" Role="VideoTables" Multiplicity="*" />
+          <End Type="muzykaDatabaseModel.Users" Role="Users" Multiplicity="*" />
+        </Association>
+        <Association Name="UserstabulatureTable">
+          <End Type="muzykaDatabaseModel.Users" Role="Users" Multiplicity="0..1" />
+          <End Type="muzykaDatabaseModel.tabulatureTable" Role="tabulatureTable" Multiplicity="*" />
+        </Association>
+        <Association Name="UsersVideoCorrelations">
+          <End Type="muzykaDatabaseModel.Users" Role="Users" Multiplicity="1" />
+          <End Type="muzykaDatabaseModel.VideoCorrelations" Role="VideoCorrelations" Multiplicity="*" />
+        </Association>
+        <Association Name="UsersinstrumentTable">
+          <End Type="muzykaDatabaseModel.Users" Role="Users" Multiplicity="0..1" />
+          <End Type="muzykaDatabaseModel.instrumentTable" Role="instrumentTable" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="muzykaDatabaseModelStoreContainer" CdmEntityContainer="muzykaDatabaseEntities">
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="IsTypeOf(muzykaDatabaseModel.Users)">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="PasswordResetCode" ColumnName="PasswordResetCode" />
+                <ScalarProperty Name="AccountActivationCode" ColumnName="AccountActivationCode" />
+                <ScalarProperty Name="IsActivated" ColumnName="IsActivated" />
+                <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UsersRoles">
+            <EntityTypeMapping TypeName="muzykaDatabaseModel.UsersRoles">
+              <MappingFragment StoreEntitySet="UsersRoles">
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VideoCorrelations">
+            <EntityTypeMapping TypeName="muzykaDatabaseModel.VideoCorrelations">
+              <MappingFragment StoreEntitySet="VideoCorrelations">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="DateAssociation" ColumnName="DateAssociation" />
+                <ScalarProperty Name="CoverVideoID" ColumnName="CoverVideoID" />
+                <ScalarProperty Name="OriginalVideoID" ColumnName="OriginalVideoID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VideoTables">
+            <EntityTypeMapping TypeName="muzykaDatabaseModel.VideoTables">
+              <MappingFragment StoreEntitySet="VideoTables">
+                <ScalarProperty Name="musicFileName" ColumnName="musicFileName" />
+                <ScalarProperty Name="musicPath" ColumnName="musicPath" />
+                <ScalarProperty Name="musicDescription" ColumnName="musicDescription" />
+                <ScalarProperty Name="musicType" ColumnName="musicType" />
+                <ScalarProperty Name="musicGuid" ColumnName="musicGuid" />
+                <ScalarProperty Name="musicDateUpload" ColumnName="musicDateUpload" />
+                <ScalarProperty Name="musicTypeExtension" ColumnName="musicTypeExtension" />
+                <ScalarProperty Name="musicArtist" ColumnName="musicArtist" />
+                <ScalarProperty Name="musicName" ColumnName="musicName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="musicID" ColumnName="musicID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Model1">
+        <EntityTypeShape EntityType="muzykaDatabaseModel.friendsConnectedTable" Width="1.5" PointX="0.75" PointY="0.5" Height="1.9802864583333331" IsExpanded="true" />
+        <EntityTypeShape EntityType="muzykaDatabaseModel.instrumentTable" Width="2" PointX="2.875" PointY="0.5" Height="1.9802864583333335" IsExpanded="true" />
+        <EntityTypeShape EntityType="muzykaDatabaseModel.musicMusicTable" Width="1.5" PointX="0.5" PointY="5.25" Height="3.3263964843749996" IsExpanded="true" />
+        <EntityTypeShape EntityType="muzykaDatabaseModel.tabulatureTable" Width="1.5" PointX="9.875" PointY="2.5" Height="3.5186979166666656" IsExpanded="true" />
+        <EntityTypeShape EntityType="muzykaDatabaseModel.Users" Width="1.5" PointX="4.75" PointY="4.375" Height="3.9033007812499996" />
+        <EntityTypeShape EntityType="muzykaDatabaseModel.UsersRoles" Width="1.5" PointX="5.25" PointY="0.875" Height="1.5956835937499996" />
+        <EntityTypeShape EntityType="muzykaDatabaseModel.VideoCorrelations" Width="1.5" PointX="2.125" PointY="2.875" Height="2.1725878906249996" />
+        <EntityTypeShape EntityType="muzykaDatabaseModel.VideoTables" Width="1.5" PointX="7.625" PointY="1.5" Height="3.3263964843749996" />
+        <AssociationConnector Association="muzykaDatabaseModel.FK_dbo_Users_dbo_UsersRoles_RoleId" >
+          <ConnectorPoint PointX="5.75" PointY="2.4706835937499996" />
+          <ConnectorPoint PointX="5.75" PointY="4.375" />
+        </AssociationConnector>
+        <AssociationConnector Association="muzykaDatabaseModel.musicMusicTableUsers">
+          <ConnectorPoint PointX="2" PointY="6.9131982421875" />
+          <ConnectorPoint PointX="4.75" PointY="6.9131982421875" />
+        </AssociationConnector>
+        <AssociationConnector Association="muzykaDatabaseModel.VideoTablesUsers">
+          <ConnectorPoint PointX="7.625" PointY="4.6006982421875" />
+          <ConnectorPoint PointX="6.25" PointY="4.6006982421875" />
+        </AssociationConnector>
+        <AssociationConnector Association="muzykaDatabaseModel.UserstabulatureTable">
+          <ConnectorPoint PointX="6.25" PointY="5.4537972005208326" />
+          <ConnectorPoint PointX="9.875" PointY="5.4537972005208326" />
+        </AssociationConnector>
+        <AssociationConnector Association="muzykaDatabaseModel.UsersVideoCorrelations">
+          <ConnectorPoint PointX="4.75" PointY="4.7112939453125" />
+          <ConnectorPoint PointX="4.2708308333333331" PointY="4.7112939453124989" />
+          <ConnectorPoint PointX="4.1041641666666671" PointY="4.7112939453125" />
+          <ConnectorPoint PointX="3.625" PointY="4.7112939453125" />
+        </AssociationConnector>
+        <AssociationConnector Association="muzykaDatabaseModel.UsersinstrumentTable">
+          <ConnectorPoint PointX="4.75" PointY="6.1942382080078122" />
+          <ConnectorPoint PointX="4.1874975" PointY="6.1942382080078122" />
+          <ConnectorPoint PointX="4.1874975" PointY="2.672587890625" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>
